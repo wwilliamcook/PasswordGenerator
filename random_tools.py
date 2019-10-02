@@ -121,6 +121,11 @@ def randomPin(digits):
 
 def getWordList(path='wordlist.txt'):
     """Returns the list of the words stored in the given file.
+
+    Downloads a list from the internet if it cannot be found locally.
+
+    Args:
+        path: Path to file containing list of words.
     """
     def replacechars(s, fromchars, tochar):
         for c in fromchars:
