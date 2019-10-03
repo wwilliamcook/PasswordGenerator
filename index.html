@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="brython.js"></script>
+        <script type="text/javascript" src="brython_modules.js"></script>
+        <style>
+            .column {
+                width: 80%;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .passwordbox {
+                border: 1px solid black;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                overflow-wrap: break-word;
+            }
+            .inum {
+                width: 45px;
+            }
+        </style>
+    </head>
+    <body onload="brython()">
+        <script type="text/python">
+            from browser import document, alert
+
+            from random_tools import densePassword, memorablePassword
+
+            def generateDensePassword(ev):
+                length = int(document['length'].value)
+                document['password'].innerHTML = densePassword(length)
+
+            def generateMemorablePassword(ev):
+                minwords = int(document['minwords'].value)
+                maxwords = int(document['maxwords'].value)
+                mindigits = int(document['mindigits'].value)
+                maxdigits = int(document['maxdigits'].value)
+                minpadding = int(document['minpadding'].value)
+                maxpadding = int(document['maxpadding'].value)
+                minwordlength = int(document['minwordlength'].value)
+                document['password'].innerHTML = memorablePassword(minwords, maxwords, mindigits, maxdigits, minpadding, maxpadding, minwordlength)
+            
+            document['densebutton'].bind('click', generateDensePassword)
+            document['memorablebutton'].bind('click', generateMemorablePassword)
+        </script>
+        <div class="column">
+            <h1>PasswordGenerator</h1>
+            <p class="passwordbox" id="password">Press a button below to generate a password!</p>
+            <div>
+                <button id="densebutton">Generate Dense Password</button>
+                <button id="memorablebutton">Generate Memorable Password</button>
+            </div>
+            <div>
+                Length of dense password: 
+                <input class="inum" id="length" type="number" min="8" max="1024" value="16">
+                <br /><br />
+                Minimum words in memorable password: 
+                <input class="inum" id="minwords" type="number" min="3" max="100" value="7">
+                <br />
+                Maximum words in memorable password: 
+                <input class="inum" id="maxwords" type="number" min="5" max="100" value="10">
+                <br />
+                Minimum number of padding digits: 
+                <input class="inum" id="mindigits" type="number" min="3" max="5" value="3">
+                <br />
+                Maximum number of padding digits: 
+                <input class="inum" id="maxdigits" type="number" min="3" max="5" value="5">
+                <br />
+                Minimum number of special padding characters: 
+                <input class="inum" id="minpadding" type="number" min="3" max="5" value="2">
+                <br />
+                Maximum number of special padding characters: 
+                <input class="inum" id="maxpadding" type="number" min="3" max="5" value="7">
+                <br />
+                Minimum word length: 
+                <input class="inum" id="minwordlength" type="number" min="1" max="12" value="4">
+            </div>
+            <p>Passwords are generated on the client-side, so nobody can snoop on them over the internet.</p>
+        </div>
+    </body>
+</html>
