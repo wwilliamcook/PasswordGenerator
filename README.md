@@ -4,7 +4,9 @@ Cryptographically secure password generator. Uses `os.urandom` and aims for stat
 * **Memorable** - generates long, more feasibly memorable passwords using words and predictable organization. Inspired by [XKCD](https://xkcd.com/936/).
 
 ## Usage
-The `main` function is located in `generate.py`, so just run that file with python. It can be used with or without command line arguments, with the same degree of functionality either way.
+For easy in-browser use, see the full-featured web app demo [here](https://wwilliamcook.github.io/PasswordGenerator/).
+
+For use with Python, the `main` function is located in `generate.py`, so just run that file with Python. It can be used with or without command line arguments, with the same degree of functionality either way.
 Run `python generate.py -h` to see available command line options or just run `python generate.py` to use the built-in UI.
 
 ## Dependencies
