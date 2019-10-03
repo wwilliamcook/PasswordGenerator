@@ -6,7 +6,7 @@ Word list retrieved from https://github.com/first20hours/google-10000-english.
 import sys
 import os
 import math
-import requests
+from wordlist import wordlist
 
 
 def randomInteger(a, b):
@@ -119,46 +119,10 @@ def randomPin(digits):
     """
     return ''.join([randomDigit() for i in range(digits)])
 
-def getWordList(path='wordlist.txt'):
-    """Returns the list of the words stored in the given file.
-
-    Downloads a list from the internet if it cannot be found locally.
-
-    Args:
-        path: Path to file containing list of words.
+def getWordList():
+    """Returns the list of the words stored in 'wordlist.py'.
     """
-    def replacechars(s, fromchars, tochar):
-        for c in fromchars:
-            s = s.replace(c, tochar)
-        return s
-
-    try:
-        if os.path.exists(path):
-            # Read words from file
-            with open(path) as f:
-                words = f.read()
-            savewhendone = False
-        else:
-            # Download words
-            url = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa-no-swears.txt'
-            words = requests.get(url).content.decode()
-            savewhendone = True
-    except Exception as e:
-        print('%s: %s' % (str(type(e))[8:-2], e), file=sys.stderr)
-        exit()
-    words = words.lower().strip(' \t\n\r\x0b\x0c')
-    # Replace all whitespace with newlines
-    words = replacechars(words, ' \t\n\r\x0b\x0c', '\n')
-    # Convert to list
-    words = words.split('\n')
-    # Remove empty strings
-    words = [w for w in words if w]
-
-    if savewhendone:
-        with open(path, 'w+') as f:
-            f.write('\n'.join(words))
-    
-    return words
+    return wordlist
 
 def randomWord(min_len=1, max_len=None, wordList=None):
     """Returns a random word.
@@ -215,10 +179,10 @@ def densePassword(length=32, lower=True, upper=True, digits=True, special=True):
             # Randomly select (without replacement) from the new
             # characters and add them until the password is full
             newchars = list(newchars)
-            while len(out) <= length:
+            while len(out) < length:
                 out += newchars.pop(randomInteger(0, len(newchars)))
     
-    assert len(out) == length
+    assert len(out) == length, 'Length of output does not match desired length.'
 
     return shuffle(out)
 
