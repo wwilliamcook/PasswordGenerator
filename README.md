@@ -17,4 +17,6 @@ The libraries used in this code were chosen to avoid external dependencies. Here
 * `argparse`
 
 ## Credits
+The web app uses [Brython](https://brython.info/) to run the Python code in the client browser.
+
 The word list used for *memorable* mode is pulled from [Josh Kaufman's google-10000-english](https://github.com/first20hours/google-10000-english).
