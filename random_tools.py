@@ -179,10 +179,10 @@ def densePassword(length=32, lower=True, upper=True, digits=True, special=True):
             # Randomly select (without replacement) from the new
             # characters and add them until the password is full
             newchars = list(newchars)
-            while len(out) <= length:
+            while len(out) < length:
                 out += newchars.pop(randomInteger(0, len(newchars)))
     
-    assert len(out) == length
+    assert len(out) == length, 'Length of output does not match desired length.'
 
     return shuffle(out)
 
