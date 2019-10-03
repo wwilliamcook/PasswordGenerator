@@ -14,7 +14,6 @@ The libraries used in this code were chosen to avoid external dependencies. Here
 * `sys`
 * `os`
 * `math`
-* `requests`
 * `argparse`
 
 ## Credits
